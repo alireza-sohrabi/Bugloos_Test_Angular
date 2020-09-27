@@ -1,0 +1,138 @@
+.form-screen {
+  margin: 8px;
+}
+
+.form-screen-tools {
+  padding: 8px 12px;
+  border-bottom: var(--light-border);
+  border-bottom-width: 4px;
+  height: 50px;
+  margin-bottom: 2px;
+}
+
+.form-screen-box {
+  width: auto;
+  min-height: 450px;
+  padding: 12px;
+  border: var(--light-border);
+  border-style: dashed;
+}
+
+.form-screen-box-rows {
+  display: flex;
+}
+
+.form-screen-box-row {
+  display: flex;
+  position: relative;
+
+}
+
+.form-screen-box-col-fake:before,
+.form-screen-box-row:after {
+  content: "";
+  position: absolute;
+  height: 100%;
+  border-left: 1px dashed #bdbdbd;
+  left: -9px;
+  top: -6px;
+  height: 125%;
+}
+
+.form-screen-box-row:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  border-bottom: 1px dashed #bdbdbd;
+  top: -8px;
+  left: -8px;
+}
+
+.form-screen-box-col {
+  font-size: 12px;
+  height: auto;
+  min-width: auto;
+  // margin-right: 8px;
+  // border: var(--light-border);
+  // border-style: dashed;
+  // padding: 8px;
+  display: flex;
+  flex-direction: column;
+  cursor: move !important;
+  transition: all 300ms linear;
+  user-select: none;
+  background-color: #fff;
+  position: relative;
+}
+
+.form-screen-col-details {
+  position: absolute;
+  top: -4px;
+  left: 8px;
+  display: flex;
+}
+
+.form-screen-box-col.move {
+  opacity: 0.4;
+  box-shadow: var(--box-shadow-dep-1);
+}
+
+.form-screen-box-col:hover {
+  box-shadow: var(--box-shadow-dep-1);
+}
+
+.form-screen-dargged-el {
+  position: absolute;
+
+}
+
+.form-screen-dargged-el>div {
+  transform: rotateZ(-10deg);
+  opacity: 0.9;
+}
+
+.form-screen-box-col-fake {
+  position: relative;
+  background: #f5f5f5;
+  transition: width 200ms linear;
+  width: 0;
+  height: auto;
+  visibility: hidden;
+  min-width: auto;
+  margin-right: 8px;
+  margin-left: 8px;
+  border: var(--light-border);
+  border-style: dashed;
+}
+
+.form-screeen-col-visibility {
+  visibility: visible;
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+.form-screen-col-details {}
+
+// number type
+.col-type-0 {}
+
+// text type
+.col-type-1 {}
+
+// textArea
+.col-type-2 {}
+
+// date
+.col-type-3 {}
+
+// dateRange
+.col-type-4 {}
+
+// select Box
+.col-type-5 {}
+
+// radiobutton
+.col-type-6 {}
+
+//checkbox
+.col-type-7 {}

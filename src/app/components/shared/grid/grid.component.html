@@ -1,0 +1,22 @@
+<table class="ui-table">
+  <thead>
+    <tr>
+
+      <th *ngFor="let col of columnsDef">
+        {{col.headerName}}
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr (click)="onClickRow($event, row)" [class.selected]="selectedRow == row" *ngFor="let row of rowData">
+      <td *ngFor="let col of columnsDef">
+        <div [innerHTML]="row[col.field]"></div>
+      </td>
+    </tr>
+    <tr *ngIf="!rowData || rowData.length === 0">
+      <td class="grid-not-found" [colSpan]="columnsDef?columnsDef.length:1">
+        موردی یافت نشد
+      </td>
+    </tr>
+  </tbody>
+</table>

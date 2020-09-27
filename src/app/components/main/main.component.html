@@ -1,0 +1,16 @@
+  <div class="grid-toolbars">
+    <button (click)="onAdd()" class="ui-btn ui-btn-primary ui-btn-sm"> ایجاد فرم جدید</button>
+    <button (click)="onEdit()" [disabled]="!selectedRow" class="ui-btn ui-btn-light ui-btn-sm"> ویرایش
+      فرم</button>
+
+    <button (click)="onEditScreen()" routerLink="../generator" [disabled]="!selectedRow"
+      class="ui-btn ui-btn-light ui-btn-sm">ویرایش نمایش فرم
+    </button>
+  </div>
+  <app-grid [(selectedRow)]="selectedRow" [rowData]="forms" [columnsDef]="columnsDef">
+  </app-grid>
+  <div *ngIf="showDialog">
+    <app-form-field-generator-edit #elEditForm [formId]="formId" (change)="populate()">
+
+    </app-form-field-generator-edit>
+  </div>

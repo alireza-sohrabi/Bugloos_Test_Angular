@@ -1,0 +1,156 @@
+/* You can add global styles to this file, and also import other style files */
+.form-controll {
+  position: relative;
+}
+
+.form-controll-drp > div,
+.form-controll textarea,
+.form-controll input {
+  border: 1px solid #eeeeee;
+  padding: 7px 4px 7px 24px;
+  outline: none;
+  width: 100%;
+  height: 42px;
+  font-size: 14px;
+  transition: all 0.3s ease-in-out;
+  background-color: #fff;
+}
+
+.form-controll label {
+  font-size: 15px;
+  color: #9e9e9e;
+  width: 100%;
+  display: block;
+}
+
+.form-controll input:focus,
+.form-controll textarea:focus,
+.form-controll-drp .opened {
+  border: 1px solid #bcbcbc;
+}
+
+.form-controll-delete {
+  display: none;
+  position: absolute;
+  left: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.5;
+  transition: opacity 0.3s ease-in;
+  cursor: pointer;
+}
+
+.form-controll-delete:hover {
+  opacity: 1;
+}
+
+.form-controll-delete:after,
+.form-controll-delete::before {
+  content: "";
+  position: absolute;
+  border-bottom: 1px solid;
+  width: 12px;
+  height: 10px;
+}
+
+.form-controll-delete:after {
+  top: 14px;
+  left: -1px;
+  transform: rotate(225deg);
+}
+
+.form-controll-delete::before {
+  top: 14px;
+  transform: rotate(135deg);
+  left: 6px;
+}
+
+.form-controll:hover .form-controll-delete,
+.form-controll input:focus .form-controll-delete {
+  display: inline-block;
+}
+
+/* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: PFont;
+  src: url("./assets/fonts/Yekan.eot");
+  src: url("./assets/fonts/Yekan.eot?#iefix") format("./assets/fonts/Yekan-opentype"), url("./assets/fonts/Yekan.woff") format("woff"), url("./assets/fonts/Yekan.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+html {
+  direction: rtl;
+}
+
+* {
+  font-family: PFont;
+  box-sizing: border-box;
+  direction: rtl;
+}
+
+html {
+  direction: rtl;
+}
+
+body {
+  overflow-y: scroll;
+  padding: 0;
+  margin: 0;
+  background-color: #efefef;
+  font-family: PFont;
+  font-size: 13px;
+}
+
+.ui-btn-sm {
+  --ui-btn-height: var(--ui-btn-size-sm);
+  --ui-btn-padding: 0 17px;
+  font-size: 12px;
+}
+
+.ui-btn.ui-btn-light {
+  --ui-btn-background-color: #eeeeee !important;
+  --ui-btn-border: 1px solid;
+  --ui-btn-border-color: #9e9e9e;
+  --ui-btn-color: #fff;
+  --ui-btn-background-hover: #fff;
+}
+
+.ui-btn.ui-btn-success {
+  --ui-btn-background-color: #00c851 !important;
+  --ui-btn-border: 1px solid;
+  --ui-btn-border-color: #28a745;
+  --ui-btn-color: #fff;
+  --ui-btn-background-hover: #00c853;
+}
+
+.ui-btn {
+  margin: 0;
+  border: var(--ui-btn-border);
+  border-color: var(--ui-btn-border-color);
+  color: var(--ui-btn-color);
+  background-color: var(--ui-btn-background-color);
+  height: var(--ui-btn-height);
+  padding: var(--ui-btn-padding);
+  outline: 0;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  transition: background 150ms linear, opacity 160ms linear, border 180ms linear;
+}
+
+.ui-btn:hover {
+  background: var(--ui-btn-background-hover);
+}
+
+:root {
+  --ui-btn-size-xs: 22px;
+  --ui-btn-size-sm: 32px;
+  --ui-btn-size-md: 42px;
+  --ui-btn-color: #fff;
+  --ui-btn-background-color: #78909c;
+  --ui-btn-border-color: #59698d;
+  --ui-btn-border: 1px solid var(--ui-btn-border-color);
+  --ui-btn-height: var(--ui-btn-size-md);
+  --ui-btn-padding: 0 20px;
+  --ui-btn-background-hover: #59698d;
+}

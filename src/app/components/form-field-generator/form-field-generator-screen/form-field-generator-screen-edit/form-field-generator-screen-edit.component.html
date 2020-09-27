@@ -1,0 +1,33 @@
+<app-dialog [maxWidth]="400" [width]="'80%'" [(show)]="show" (showChange)="showChange.emit($event)">
+  <dialog-header>{{title}}</dialog-header>
+  <dialog-body>
+    <div class="form-field">
+      <app-text-box [(appFormValidator)]="form" [name]="'name'" [label]="'نام'" [(value)]="model.name">
+      </app-text-box>
+      <app-text-box [(appFormValidator)]="form" [name]="'lName'" [label]="'نام نمایشی'" [(value)]="model.lName">
+      </app-text-box>
+      <app-drop-down-list [label]="'نوع فیلد'" [(appFormValidator)]="form" [name]="'fieldType'"
+        [(value)]="model.fieldType" [source]="fieldTypeSource">
+
+      </app-drop-down-list>
+      <app-check-box [label]="'ضروری'" [(appFormValidator)]="form" [name]="'required'" [(value)]="model.required">
+      </app-check-box>
+      <app-text-area [(appFormValidator)]="form" [name]="'description'" [initHeight]="100" [label]="'توضیحات'"
+        [(value)]="model.description"></app-text-area>
+
+    </div>
+  </dialog-body>
+  <dialog-footer>
+    <button style="width: 100px;" (click)="onSave()" class="ui-btn ui-btn-success ui-btn-sm">
+      ثبت
+    </button>
+    <button style="width: 100px;" (click)="close()" class="ui-btn ui-btn-link ui-btn-sm">
+      انصراف
+    </button>
+  </dialog-footer>
+</app-dialog>
+
+<div>
+
+
+</div>

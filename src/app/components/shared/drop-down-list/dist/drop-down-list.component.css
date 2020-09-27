@@ -1,0 +1,21 @@
+.drop-down-list-items {
+  overflow: auto;
+  height: 100%;
+}
+
+.drop-down-list-item {
+  margin-bottom: 3px;
+  padding: 4px 4px 4px 12px;
+  transition: all 0.4s ease-in-out;
+  width: 100%;
+  cursor: pointer;
+}
+
+.drop-down-list-item:hover {
+  background-color: #e0e0e0;
+}
+
+.drop-down-list-item.selected {
+  background-color: #607d8b;
+  color: #fff;
+}

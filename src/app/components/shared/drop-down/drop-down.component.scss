@@ -1,0 +1,43 @@
+.form-control-drp {
+  cursor: pointer;
+  min-width: 100px;
+  // padding-top: 40px;
+}
+
+
+
+.drop-down-window {
+  z-index: 101;
+  position: absolute;
+  box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
+  height: 150px;
+  background-color: #ffffff;
+  border: 1px soid #e0e0e0;
+}
+
+.form-control-drp-icon {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.form-control-drp-icon:after {
+  content: "";
+  border-bottom: 1px solid;
+  border-left: 1px solid;
+  width: 8px;
+  height: 8px;
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: rotate(-45deg) translateY(-50%);
+}
+
+.form-control-drp>div {
+  padding-left: 40px;
+}
+
+.form-control-drp .form-control-delete {
+  left: 24px;
+}

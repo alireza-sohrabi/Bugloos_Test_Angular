@@ -1,0 +1,9 @@
+<app-drop-down (clear)="onClear()" #drp [label]="label" [value]="displayValue">
+  <div class="drop-down-list-items">
+    <div [class.selected]="item[valueMember]===value" (click)="onSelectItem(item)" [innerHTML]="item[displayMember]"
+      class="drop-down-list-item" *ngFor="let item of source">
+
+    </div>
+  </div>
+
+</app-drop-down>

@@ -1,0 +1,6 @@
+<div [class.form-control-has-label]="label" class="form-control">
+  <label *ngIf="label" [innerHTML]="label"></label>
+  <input [placeholder]="placeholder" [disabled]="disabled" [readOnly]="readOnly" type="number" [(ngModel)]="value"
+    (ngModelChange)="valueChange.emit($event)" />
+  <span (click)="onClear()" *ngIf="value && !disabled && !readOnly" class="form-control-delete"></span>
+</div>

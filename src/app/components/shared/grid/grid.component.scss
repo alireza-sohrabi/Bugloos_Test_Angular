@@ -1,0 +1,48 @@
+.grid-toolbars {
+  padding: 8px 12px;
+}
+
+.ui-table {
+  table-layout: fixed;
+  border-spacing: 0;
+  background-color: #eef2f4;
+  width: 100%;
+}
+
+.ui-table thead {
+  border: 1px solid #e0e0e0;
+}
+
+.ui-table th {
+  padding: 9px 12px;
+  min-width: 100px;
+  background-color: #fff;
+  margin: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  border-bottom: 4px solid #eeeeee;
+  text-align: inherit;
+}
+
+.ui-table td {
+  border-bottom: 1px solid #e0e0e0;
+  box-sizing: border-box;
+  padding: 0;
+  background-color: #fff;
+  text-align: inherit;
+  padding: 5px 8px;
+}
+
+.ui-table tr:hover td {
+  background-color: #e0e0e0;
+}
+
+.ui-table tr.selected td {
+  background-color: #ccff90;
+}
+
+.grid-not-found {
+  height: 200px;
+  width: 100%;
+  background-color: #fff;
+}

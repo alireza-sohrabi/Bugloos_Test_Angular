@@ -1,0 +1,10 @@
+<div [class.form-control-has-label]="label" [id]="id" (click)="toggle()" #drpBox class="form-control form-control-drp">
+  <label *ngIf="label" [innerHTML]="label"></label>
+
+  <div [class.opened]="showDrpWin" [innerHTML]="value"></div>
+  <span (click)="onClear()" *ngIf="value && !disabled" class="form-control-delete"></span>
+  <span class="form-control-drp-icon"></span>
+</div>
+<div #drpWin [hidden]="hiddenDrpWin" data-id="{{ id }}" [ngStyle]="style" *ngIf="showDrpWin" class="drop-down-window">
+  <ng-content></ng-content>
+</div>

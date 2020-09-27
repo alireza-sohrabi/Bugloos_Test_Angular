@@ -1,0 +1,5 @@
+.form-controll textarea {
+  padding-left: 4px;
+  resize: none;
+  min-height: 5px;
+}
