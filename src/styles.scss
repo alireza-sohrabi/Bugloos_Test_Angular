@@ -102,15 +102,36 @@ body {
   background: var(--ui-btn-background-hover);
 }
 
+.alert {
+  padding: 8px 20px 8px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  border-radius: 8px;
+}
+
+.alert-warning {
+  background: var(--ui-warning);
+  color: var(--ui-wraning-text);
+}
+
+.alert-danger {
+  background: var(--ui-danger);
+  color: var(--ui-danger-text);
+}
+
 .text-danger {
-  color: #e53935;
+  color: var(--ui-danger-text);
 }
 
 .text-warning {
-  color: #ffeb3b;
+  color: var(--ui-wraning-text);
 }
 
 :root {
+  --ui-warning: #ffeb3b;
+  --ui-warning-text: #ffd600;
+  --ui-danger: #ff8a80;
+  --ui-danger-text: #d50000;
   --ui-btn-size-xs: 22px;
   --ui-btn-size-sm: 32px;
   --ui-btn-size-md: 42px;
