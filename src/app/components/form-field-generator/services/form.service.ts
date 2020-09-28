@@ -100,15 +100,17 @@ export class FormService {
   ): Observable<ResultObjectModel<string>> {
     const result = new ResultObjectModel<string>();
     try {
+      debugger;
       const onDb = localStorage[this.mainUrl];
       let items: FormModel[];
       if (!onDb) {
         items = [model];
       } else {
         items = JSON.parse(onDb) as FormModel[];
-        let item = items.find((w) => w.id === formId);
-        if (item) {
-          item = model;
+        const itemIndex = items.findIndex((w) => w.id === formId);
+        if (itemIndex !== -1) {
+          items.splice(itemIndex, 1);
+          items.unshift(model);
         } else {
           result.isOk = false;
           result.message = 'فرم یافت نشد';

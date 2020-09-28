@@ -18,6 +18,8 @@ export class TextAreaComponent implements OnInit {
   @Input() label: string;
   @Input() value: string;
   @Input() initHeight = 50;
+  @Input() disabled = false;
+  @Input() placeholder = '';
   @Output() valueChange = new EventEmitter<string>();
   ngOnInit(): void {}
 }

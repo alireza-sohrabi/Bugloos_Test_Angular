@@ -1,6 +1,6 @@
 <div class="form-control-check-box">
   <label [for]="id">
-    <input [id]="id" [checked]="value" (change)="onChange($event)" type="checkbox">
+    <input [disabled]="disabled" [id]="id" [checked]="value" (change)="onChange($event)" type="checkbox">
     <span [innerHTML]="label"></span>
   </label>
 </div>

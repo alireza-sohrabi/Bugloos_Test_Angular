@@ -11,6 +11,7 @@ var core_1 = require("@angular/core");
 var uuid_1 = require("uuid");
 var CheckBoxComponent = /** @class */ (function () {
     function CheckBoxComponent() {
+        this.disabled = false;
         this.value = false;
         this.valueChange = new core_1.EventEmitter();
         this.id = uuid_1.v4();
@@ -20,6 +21,9 @@ var CheckBoxComponent = /** @class */ (function () {
         this.valueChange.emit(this.value);
     };
     CheckBoxComponent.prototype.ngOnInit = function () { };
+    __decorate([
+        core_1.Input()
+    ], CheckBoxComponent.prototype, "disabled");
     __decorate([
         core_1.Input()
     ], CheckBoxComponent.prototype, "label");

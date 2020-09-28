@@ -4,51 +4,116 @@
       ایجاد فیلد جدید
     </button>
 
-    <button [disabled]="!selectedItem" (click)="onEditField()" class="ui-btn ui-btn-light ui-btn-sm">
+    <button [disabled]="!selectedItemForEdit" (click)="onEditField()" class="ui-btn ui-btn-light ui-btn-sm">
       ویرایش فیلد
     </button>
   </div>
-  <div class="form-screen-box">
-    <div>
-      <div *ngFor="let row of fields" class="form-screen-box-rows">
-        <div (mouseenter)="onMouseEnter($event, col)" (mouseleave)="onMouseLeave($event, col)"
-          *ngFor="let col of row.cols; let firstcol = first; let lastcol = last" class="form-screen-box-row">
-          <div [style.width.px]="col['showFake']?selectedItem?.el.clientWidth:'0'"
-            [class.form-screeen-col-visibility]="col['showFake']" class="form-screen-box-col-fake"></div>
-          <div>
-            <div [class.move]="selectedItem?.model === col" (mousedown)="onMouseDown($event, col)"
-              [class]="'form-screen-box-col col-type-' + col.fieldType">
-              <div>
-                <div [ngSwitch]="col.fieldType">
-                  <div *ngSwitchCase="fieldTypes.Number">
-                    <app-number-box [disabled]="true" [placeholder]="col.lName" [readOnly]="true"></app-number-box>
+
+  <div class="form-scree box" (mouseleave)="leave()">
+    <table class="form-screen-box-table">
+      <tbody>
+        <tr class="form-screen-box-row" *ngFor="let row of fields;let rowIndex=index">
+
+          <td *ngFor="let col of row.cols; let firstcol = first; let lastcol = last;let colIndex= index"
+            class="form-screen-box-cell" [class.form-screen-box-cell-last]="lastcol">
+            <div (mouseenter)="onMouseEnterToEmptyCell($event, rowIndex, colIndex)"
+              (mouseleave)="onMouseLeaveEmptyCell($event, col)" *ngIf="!col.id">
+            </div>
+            <div *ngIf="col.id" style="position: relative;">
+              <div class="before-cell" [style.zIndex]="draging? 1: -1"
+                (mouseenter)="onMouseEnter($event,col,row.cols,colIndex,rowIndex,'before')">
+              </div>
+              <div [class.move]="selectedItem?.model === col" (mousedown)="onMouseDown($event, col,rowIndex,colIndex)"
+                [class]="'form-screen-box-col col-type-' + col.fieldType">
+                <div>
+                  <div class="form-screen-box-field" [ngSwitch]="col.fieldType">
+                    <div *ngSwitchCase="fieldTypes.Number">
+                      <app-number-box [disabled]="true" [placeholder]="col.lName" [readOnly]="true"></app-number-box>
+                    </div>
+                    <div *ngSwitchCase="fieldTypes.Text">
+                      <app-text-box [disabled]="true" [placeholder]="col.lName" [readOnly]="true"></app-text-box>
+                    </div>
+                    <div *ngSwitchCase="fieldTypes.SelectBox">
+                      <app-drop-down [disabled]="true" [value]="col.lName"></app-drop-down>
+                    </div>
+                    <div *ngSwitchCase="fieldTypes.TextArea">
+                      <app-text-area [disabled]="true" [placeholder]="col.lName" [value]="col.lName"></app-text-area>
+                    </div>
+                    <div *ngSwitchCase="fieldTypes.CheckBox">
+                      <app-check-box [label]="col.lName" [disabled]="true" [value]="col.lName"></app-check-box>
+                    </div>
+                    <div *ngSwitchDefault>output2</div>
                   </div>
-                  <div *ngSwitchCase="fieldTypes.Text">
-                    <app-text-box [disabled]="true" [placeholder]="col.lName" [readOnly]="true"></app-text-box>
-                  </div>
-                  <div *ngSwitchCase="fieldTypes.SelectBox">
-                    <app-drop-down [disabled]="true" [value]="col.lName"></app-drop-down>
-                  </div>
-                  <div *ngSwitchDefault>output2</div>
+                </div>
+                <div class="form-screen-col-details">
+                  <div [innerHTML]="col.required | fieldRequired"></div>
                 </div>
               </div>
-              <div class="form-screen-col-details">
-                <!-- <div style="font-weight: bold">
+
+              <div class="after-cell" [style.zIndex]="draging? 1: -1"
+                (mouseenter)="onMouseEnter($event,col,row.cols,colIndex,rowIndex,'after')">
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <td class="form-screen-box-cell" #elFake [hidden]="!draging">
+    <div class="form-screen-box-col-fake"></div>
+  </td>
+
+  <div [hidden]="true" class="form-screen-box">
+    <div>
+      <div *ngFor="let row of fields;let rowIndex = index" class="form-screen-box-cells">
+        <div (mouseenter)="onMouseEnter($event, col,row.cols,rowIndex, colIndex)"
+          (mouseleave)="onMouseLeave($event, col)"
+          *ngFor="let col of row.cols; let firstcol = first; let lastcol = last;let colIndex= index"
+          class="form-screen-box-cell" [class.form-screen-box-cell-last]="lastcol">
+          <div [style.width.px]="col['showFake']?selectedItem?.el.clientWidth:'0'"
+            [style.height.px]="col['showFake']?selectedItem?.el.clientHeight:'0'"
+            [class.form-screeen-col-visibility]="col['showFake']" class="form-screen-box-col-fake"></div>
+          <div *ngIf="col.fieldType" [class.move]="selectedItem?.model === col" (mousedown)="onMouseDown($event, col)"
+            [class]="'form-screen-box-col col-type-' + col.fieldType">
+            <div>
+              <div [ngSwitch]="col.fieldType">
+                <div *ngSwitchCase="fieldTypes.Number">
+                  <app-number-box [disabled]="true" [placeholder]="col.lName" [readOnly]="true"></app-number-box>
+                </div>
+                <div *ngSwitchCase="fieldTypes.Text">
+                  <app-text-box [disabled]="true" [placeholder]="col.lName" [readOnly]="true"></app-text-box>
+                </div>
+                <div *ngSwitchCase="fieldTypes.SelectBox">
+                  <app-drop-down [disabled]="true" [value]="col.lName"></app-drop-down>
+                </div>
+                <div *ngSwitchCase="fieldTypes.TextArea">
+                  <app-text-area [disabled]="true" [placeholder]="col.lName" [value]="col.lName"></app-text-area>
+                </div>
+                <div *ngSwitchCase="fieldTypes.CheckBox">
+                  <app-check-box [label]="col.lName" [disabled]="true" [value]="col.lName"></app-check-box>
+                </div>
+                <div *ngSwitchDefault>output2</div>
+              </div>
+            </div>
+            <div class="form-screen-col-details">
+              <!-- <div style="font-weight: bold">
                   {{ col.lName }}
                 </div>
                 <div [innerHTML]="col.fieldType | fieldType"></div> -->
-                <div [innerHTML]="col.required | fieldRequired"></div>
-              </div>
+              <div [innerHTML]="col.required | fieldRequired"></div>
             </div>
           </div>
-          <div *ngIf="lastcol" class="form-screen-box-col-fake"></div>
+          <div (mouseenter)="onMouseEnter($event, col,row.cols,rowIndex, colIndex)" *ngIf="lastcol"
+            [style.width.px]="col['showFake_last']?selectedItem?.el.clientWidth:'0'"
+            [style.height.px]="col['showFake_last']?selectedItem?.el.clientHeight:'0'"
+            [class.form-screeen-col-visibility]="col['showFake_last']" class="form-screen-box-col-fake">
+          </div>
         </div>
-      </div>
-      <div class="form-screen-dargged-el" [hidden]="!draging" #elForMove></div>
 
+      </div>
     </div>
   </div>
-</div>
-<app-form-field-generator-screen-edit (change)="populate()" #elEditField *ngIf="showDialog" [formId]="formId"
-  [fieldId]="fieldId">
-</app-form-field-generator-screen-edit>
+  <div class="form-screen-dargged-el" [hidden]="!draging" #elForMove></div>
+  <app-form-field-generator-screen-edit (change)="populate()" #elEditField *ngIf="showDialog" [formId]="formId"
+    [fieldId]="fieldId">
+  </app-form-field-generator-screen-edit>

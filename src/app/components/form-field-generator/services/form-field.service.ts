@@ -95,7 +95,6 @@ export class FormFieldService {
     model: FormFiledModel,
     formId: string
   ): Observable<ResultObjectModel<any>> {
-    debugger;
     const result = new ResultObjectModel<string>();
     try {
       if (!model.id) {
@@ -149,11 +148,16 @@ export class FormFieldService {
           return this.formNotFound(result);
         }
         const fields = form.formFields;
-        let field = fields.find((w) => w.id === fieldId);
-        if (!field) {
+        const fieldIndex = fields.findIndex((w) => w.id === fieldId);
+        if (fieldIndex === -1) {
           return this.fieldNotFound(result);
         }
-        field = model;
+        fields.splice(fieldIndex, 1);
+        fields.push(model);
+        form.formFields = fields;
+        const formIndex = items.findIndex((w) => w.id === form.id);
+        items.splice(formIndex, 1);
+        items.push(form);
       }
       localStorage[this.mainUrl] = JSON.stringify(items);
       return of(result);
@@ -162,5 +166,17 @@ export class FormFieldService {
       result.message = error;
       return of(result);
     }
+  }
+  moveField(
+    model: FormFiledModel,
+    formId: string,
+    rowIndex: number,
+    colIndex: number
+  ): Observable<ResultObjectModel<any>> {
+    model.rowIndex = rowIndex;
+    model.colIndex = colIndex;
+    debugger;
+
+    return this.updateField(model, formId, model.id);
   }
 }

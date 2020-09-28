@@ -16,6 +16,7 @@ import { v4 as uuidv4 } from 'uuid';
 })
 export class CheckBoxComponent implements OnInit {
   constructor() {}
+  @Input() disabled = false;
   @Input() label: string;
   @Input() value = false;
   @Output() valueChange = new EventEmitter<boolean>();

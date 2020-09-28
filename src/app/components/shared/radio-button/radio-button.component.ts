@@ -12,6 +12,7 @@ export class RadioButtonComponent implements OnInit {
   @Input() label: string;
   @Input() value = false;
   @Input() name: string;
+  @Input() disabled = false;
   @Output() valueChange = new EventEmitter<boolean>();
   id = uuidv4();
   onChange(ev: Event): void {

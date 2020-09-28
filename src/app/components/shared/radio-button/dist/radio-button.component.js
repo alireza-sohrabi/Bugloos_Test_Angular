@@ -12,6 +12,7 @@ var uuid_1 = require("uuid");
 var RadioButtonComponent = /** @class */ (function () {
     function RadioButtonComponent() {
         this.value = false;
+        this.disabled = false;
         this.valueChange = new core_1.EventEmitter();
         this.id = uuid_1.v4();
     }
@@ -29,6 +30,9 @@ var RadioButtonComponent = /** @class */ (function () {
     __decorate([
         core_1.Input()
     ], RadioButtonComponent.prototype, "name");
+    __decorate([
+        core_1.Input()
+    ], RadioButtonComponent.prototype, "disabled");
     __decorate([
         core_1.Output()
     ], RadioButtonComponent.prototype, "valueChange");

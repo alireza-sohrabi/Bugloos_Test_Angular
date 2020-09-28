@@ -1,6 +1,6 @@
 <div class="form-control-radio-button">
   <label [for]="id">
-    <input [name]="name" [id]="id" type="radio" [checked]="value" (change)="onChange($event)">
+    <input [disabled]="disabled" [name]="name" [id]="id" type="radio" [checked]="value" (change)="onChange($event)">
     <span [innerHTML]="label"></span>
   </label>
 </div>

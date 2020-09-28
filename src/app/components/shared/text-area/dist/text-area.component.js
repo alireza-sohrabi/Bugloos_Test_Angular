@@ -11,6 +11,8 @@ var core_1 = require("@angular/core");
 var TextAreaComponent = /** @class */ (function () {
     function TextAreaComponent() {
         this.initHeight = 50;
+        this.disabled = false;
+        this.placeholder = '';
         this.valueChange = new core_1.EventEmitter();
     }
     TextAreaComponent.prototype.ngOnInit = function () { };
@@ -23,6 +25,12 @@ var TextAreaComponent = /** @class */ (function () {
     __decorate([
         core_1.Input()
     ], TextAreaComponent.prototype, "initHeight");
+    __decorate([
+        core_1.Input()
+    ], TextAreaComponent.prototype, "disabled");
+    __decorate([
+        core_1.Input()
+    ], TextAreaComponent.prototype, "placeholder");
     __decorate([
         core_1.Output()
     ], TextAreaComponent.prototype, "valueChange");

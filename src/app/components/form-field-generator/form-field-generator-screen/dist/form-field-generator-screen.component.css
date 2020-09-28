@@ -11,53 +11,50 @@
 }
 
 .form-screen-box {
-  width: auto;
   min-height: 450px;
   padding: 12px;
   border: var(--light-border);
   border-style: dashed;
-}
-
-.form-screen-box-rows {
-  display: flex;
-}
-
-.form-screen-box-row {
-  display: flex;
-  position: relative;
-}
-
-.form-screen-box-col-fake:before,
-.form-screen-box-row:after {
-  content: "";
-  position: absolute;
-  height: 100%;
-  border-left: 1px dashed #bdbdbd;
-  left: -9px;
-  top: -6px;
-  height: 125%;
-}
-
-.form-screen-box-row:before {
-  content: "";
-  position: absolute;
   width: 100%;
-  border-bottom: 1px dashed #bdbdbd;
-  top: -8px;
-  left: -8px;
+  overflow: auto;
+}
+
+.form-screen-box-table {
+  border-spacing: 0;
+}
+
+.form-screen-box-cell {
+  position: relative;
+  border-bottom: var(--light-border);
+  border-bottom-style: dashed;
+  border-left: var(--light-border);
+  border-left-style: dashed;
+}
+
+.form-screen-box-cell > div:not(.form-screen-box-col-fake) {
+  min-height: 40px;
+  min-width: 150px;
+}
+
+.form-screen-box-cell-last .form-screen-box-col-fake:last-child:before {
+  right: -10px;
+  left: unset;
 }
 
 .form-screen-box-col {
   font-size: 12px;
   height: auto;
   min-width: auto;
+  min-width: 130px;
+  min-height: 30px;
   display: flex;
   flex-direction: column;
   cursor: move !important;
   transition: all 300ms linear;
   user-select: none;
-  background-color: #fff;
+  background-color: transparent;
   position: relative;
+  border-radius: 5px;
 }
 
 .form-screen-col-details {
@@ -78,6 +75,7 @@
 
 .form-screen-dargged-el {
   position: absolute;
+  z-index: 2;
 }
 
 .form-screen-dargged-el > div {
@@ -85,6 +83,7 @@
   opacity: 0.9;
 }
 
+.form-screen-box-col-fake-fake,
 .form-screen-box-col-fake {
   position: relative;
   background: #f5f5f5;
@@ -93,10 +92,35 @@
   height: auto;
   visibility: hidden;
   min-width: auto;
-  margin-right: 8px;
-  margin-left: 8px;
   border: var(--light-border);
   border-style: dashed;
+}
+
+.before-cell {
+  z-index: -1;
+  opacity: 0;
+  position: absolute;
+  width: 45%;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+}
+
+.after-cell {
+  opacity: 0;
+  z-index: -1;
+  position: absolute;
+  width: 45%;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+}
+
+.form-screen-box-col-fake-fake {
+  visibility: visible;
+  width: 100%;
 }
 
 .form-screeen-col-visibility {
