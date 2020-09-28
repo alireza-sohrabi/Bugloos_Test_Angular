@@ -50,6 +50,7 @@ export class DialogComponent implements OnInit {
   }
   close(): void {
     if (this.elDialog) {
+      document.body.click();
       const el = this.anim.nativeElement as HTMLElement;
       el.classList.add('close');
       setTimeout(() => {

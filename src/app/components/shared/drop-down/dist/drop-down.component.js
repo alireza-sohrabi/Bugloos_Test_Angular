@@ -7,6 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 exports.__esModule = true;
 exports.DropDownComponent = void 0;
+var animations_1 = require("@angular/animations");
 var core_1 = require("@angular/core");
 var uuid_1 = require("uuid");
 var DropDownComponent = /** @class */ (function () {
@@ -16,7 +17,7 @@ var DropDownComponent = /** @class */ (function () {
         this.drpHeight = 150;
         this.required = false;
         this.clear = new core_1.EventEmitter();
-        this.hiddenDrpWin = true;
+        this.addCloseClass = false;
         this.showDrpWin = false;
         this.style = {};
     }
@@ -35,7 +36,7 @@ var DropDownComponent = /** @class */ (function () {
             setTimeout(function () {
                 _this.setPosiotion().then(function () {
                     setTimeout(function () {
-                        _this.hiddenDrpWin = false;
+                        _this.addCloseClass = false;
                     }, 0);
                 });
             }, 0);
@@ -46,10 +47,12 @@ var DropDownComponent = /** @class */ (function () {
     };
     DropDownComponent.prototype.close = function () {
         var _this = this;
-        this.style = { top: 0, width: 0 };
+        this.addCloseClass = true;
         setTimeout(function () {
             _this.showDrpWin = false;
-        }, 0);
+            _this.style = { top: 0, width: 0 };
+            _this.addCloseClass = false;
+        }, 130);
     };
     DropDownComponent.prototype.setPosiotion = function () {
         var _this = this;
@@ -62,7 +65,8 @@ var DropDownComponent = /** @class */ (function () {
             _this.style['right'] = Math.abs(refCoords.right - container.clientWidth) + "px";
             _this.style['width'] = refEl.clientWidth + "px";
             _this.style['top'] = refCoords.top + refEl.clientHeight + 3 + "px";
-            if (refCoords.bottom + _this.drpHeight > container.clientHeight) {
+            if (refCoords.bottom + _this.drpHeight >
+                window.document.documentElement.clientHeight) {
                 _this.style['top'] = refCoords.top - _this.drpHeight - 3 + "px";
             }
             container.appendChild(_this.drpWin.nativeElement);
@@ -131,7 +135,18 @@ var DropDownComponent = /** @class */ (function () {
             selector: 'app-drop-down',
             templateUrl: './drop-down.component.html',
             styleUrls: ['./drop-down.component.scss'],
-            encapsulation: core_1.ViewEncapsulation.None
+            encapsulation: core_1.ViewEncapsulation.None,
+            animations: [
+                animations_1.trigger('openClose', [
+                    animations_1.state('true', animations_1.style({
+                        transform: 'translateY(0)'
+                    })),
+                    animations_1.state('false', animations_1.style({
+                        transform: 'translateY(100%)'
+                    })),
+                    animations_1.transition('true <=> false', animations_1.animate('0.3s')),
+                ]),
+            ]
         })
     ], DropDownComponent);
     return DropDownComponent;

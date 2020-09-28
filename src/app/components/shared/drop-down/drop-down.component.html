@@ -5,6 +5,7 @@
   <span (click)="onClear()" *ngIf="value && !disabled" class="form-control-delete"></span>
   <span class="form-control-drp-icon"></span>
 </div>
-<div #drpWin [hidden]="hiddenDrpWin" data-id="{{ id }}" [ngStyle]="style" *ngIf="showDrpWin" class="drop-down-window">
+<div #drpWin [class.close]="addCloseClass" data-id="{{ id }}" [ngStyle]="style" *ngIf="showDrpWin"
+  class="drop-down-window">
   <ng-content></ng-content>
 </div>

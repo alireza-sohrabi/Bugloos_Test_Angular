@@ -1,4 +1,12 @@
 import {
+  animate,
+  animation,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
+import {
   Component,
   OnInit,
   ViewEncapsulation,
@@ -16,6 +24,23 @@ import { v4 as uuidv4 } from 'uuid';
   templateUrl: './drop-down.component.html',
   styleUrls: ['./drop-down.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  animations: [
+    trigger('openClose', [
+      state(
+        'true',
+        style({
+          transform: 'translateY(0)',
+        })
+      ),
+      state(
+        'false',
+        style({
+          transform: 'translateY(100%)',
+        })
+      ),
+      transition('true <=> false', animate('0.3s')),
+    ]),
+  ],
 })
 export class DropDownComponent implements OnInit {
   constructor() {}
@@ -28,7 +53,7 @@ export class DropDownComponent implements OnInit {
   @Input() drpHeight = 150;
   @Input() required = false;
   @Output() clear = new EventEmitter<any>();
-  hiddenDrpWin = true;
+  addCloseClass = false;
   showDrpWin = false;
   style = {};
   setContent(content: string): void {
@@ -45,7 +70,7 @@ export class DropDownComponent implements OnInit {
       setTimeout(() => {
         this.setPosiotion().then(() => {
           setTimeout(() => {
-            this.hiddenDrpWin = false;
+            this.addCloseClass = false;
           }, 0);
         });
       }, 0);
@@ -54,10 +79,12 @@ export class DropDownComponent implements OnInit {
     }
   }
   close(): void {
-    this.style = { top: 0, width: 0 };
+    this.addCloseClass = true;
     setTimeout(() => {
       this.showDrpWin = false;
-    }, 0);
+      this.style = { top: 0, width: 0 };
+      this.addCloseClass = false;
+    }, 130);
   }
   setPosiotion(): Promise<any> {
     return new Promise<any>((resolve, reject) => {
@@ -73,7 +100,10 @@ export class DropDownComponent implements OnInit {
       )}px`;
       this.style['width'] = `${refEl.clientWidth}px`;
       this.style['top'] = `${refCoords.top + refEl.clientHeight + 3}px`;
-      if (refCoords.bottom + this.drpHeight > container.clientHeight) {
+      if (
+        refCoords.bottom + this.drpHeight >
+        window.document.documentElement.clientHeight
+      ) {
         this.style['top'] = `${refCoords.top - this.drpHeight - 3}px`;
       }
       container.appendChild(this.drpWin.nativeElement);

@@ -39,7 +39,6 @@ export class FormFieldGeneratorScreenEditComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-    debugger;
     this.fieldTypeSource = this.formFieldService.getFieldTypes();
   }
   populate(): void {
