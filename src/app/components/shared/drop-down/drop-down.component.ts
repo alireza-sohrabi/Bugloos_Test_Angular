@@ -135,7 +135,9 @@ export class DropDownComponent implements OnInit, OnDestroy {
     };
   }
   scrollEvenFunc(ev: Event): void {
-    this.close();
+    if (this.drpWin && !this.drpWin.nativeElement.contains(ev.target)) {
+      this.close();
+    }
   }
   removeScrollEvent(): void {
     document.removeEventListener('scroll', this.scrollEvent);

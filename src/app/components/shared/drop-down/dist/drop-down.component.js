@@ -96,7 +96,9 @@ var DropDownComponent = /** @class */ (function () {
         };
     };
     DropDownComponent.prototype.scrollEvenFunc = function (ev) {
-        this.close();
+        if (this.drpWin && !this.drpWin.nativeElement.contains(ev.target)) {
+            this.close();
+        }
     };
     DropDownComponent.prototype.removeScrollEvent = function () {
         document.removeEventListener('scroll', this.scrollEvent);
