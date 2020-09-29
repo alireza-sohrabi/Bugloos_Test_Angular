@@ -22,6 +22,7 @@ export class DialogComponent implements OnInit {
   @Input() height: string | number = 'auto';
   @Input() width: string | number = 450;
   @Input() maxWidth: string | number = '100%';
+  @Input() overflow = 'unset';
   private _show = false;
 
   @Input() set show(value: boolean) {

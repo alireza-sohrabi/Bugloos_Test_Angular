@@ -11,12 +11,15 @@ var animations_1 = require("@angular/animations");
 var core_1 = require("@angular/core");
 var uuid_1 = require("uuid");
 var DropDownComponent = /** @class */ (function () {
-    function DropDownComponent() {
+    function DropDownComponent(el) {
+        this.el = el;
         this.id = uuid_1.v4();
         this.disabled = false;
+        this.containerSelector = 'html';
         this.drpHeight = 150;
         this.required = false;
         this.clear = new core_1.EventEmitter();
+        this.scrollEvent = null;
         this.addCloseClass = false;
         this.showDrpWin = false;
         this.style = {};
@@ -24,7 +27,9 @@ var DropDownComponent = /** @class */ (function () {
     DropDownComponent.prototype.setContent = function (content) {
         this.value = content;
     };
-    DropDownComponent.prototype.ngOnInit = function () { };
+    DropDownComponent.prototype.ngOnInit = function () {
+        this.addScrollEvent();
+    };
     DropDownComponent.prototype.toggle = function () {
         var _this = this;
         if (this.disabled) {
@@ -59,17 +64,17 @@ var DropDownComponent = /** @class */ (function () {
         return new Promise(function (resolve, reject) {
             _this.style = {};
             var refEl = _this.drpBox.nativeElement.querySelector('div');
-            var htmls = document.querySelectorAll('html');
-            var container = htmls[htmls.length - 1];
+            var htmls = document.querySelectorAll(_this.containerSelector);
+            _this._container = htmls[htmls.length - 1];
             var refCoords = _this.getCoords(refEl);
-            _this.style['right'] = Math.abs(refCoords.right - container.clientWidth) + "px";
+            _this.style['left'] = refCoords.left + "px";
             _this.style['width'] = refEl.clientWidth + "px";
             _this.style['top'] = refCoords.top + refEl.clientHeight + 3 + "px";
             if (refCoords.bottom + _this.drpHeight >
                 window.document.documentElement.clientHeight) {
                 _this.style['top'] = refCoords.top - _this.drpHeight - 3 + "px";
             }
-            container.appendChild(_this.drpWin.nativeElement);
+            _this._container.appendChild(_this.drpWin.nativeElement);
             resolve();
         });
     };
@@ -90,6 +95,16 @@ var DropDownComponent = /** @class */ (function () {
             bottom: coord.bottom + window.pageYOffset
         };
     };
+    DropDownComponent.prototype.scrollEvenFunc = function (ev) {
+        this.close();
+    };
+    DropDownComponent.prototype.removeScrollEvent = function () {
+        document.removeEventListener('scroll', this.scrollEvent);
+    };
+    DropDownComponent.prototype.addScrollEvent = function () {
+        this.scrollEvent = this.scrollEvenFunc.bind(this);
+        document.addEventListener('scroll', this.scrollEvent, true);
+    };
     DropDownComponent.prototype.onClickOnBody = function (ev) {
         if (this.drpWin &&
             this.drpBox &&
@@ -102,6 +117,9 @@ var DropDownComponent = /** @class */ (function () {
         window.event.stopPropagation();
         this.value = null;
         this.clear.emit();
+    };
+    DropDownComponent.prototype.ngOnDestroy = function () {
+        this.removeScrollEvent();
     };
     __decorate([
         core_1.Input()

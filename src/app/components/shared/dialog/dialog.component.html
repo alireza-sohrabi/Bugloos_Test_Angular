@@ -1,24 +1,20 @@
 <div #elDialog *ngIf="show">
-  <html>
 
-  <body>
-    <div #anim [style.height.px]="height" [style.height]="height" [style.width.px]="width" [style.width]="width"
-      [style.maxWidth.px]="maxWidth" [style.maxWidth]="maxWidth" class="dialog-container">
-      <div class="dialog-header">
-        <ng-content select="dialog-header"></ng-content>
-        <span (click)="close()" class="dialog-header-close"></span>
-      </div>
-      <div class="dialog-body">
-        <ng-content select="dialog-body"></ng-content>
 
-      </div>
-      <div class="dialog-footer">
-        <ng-content select="dialog-footer"></ng-content>
-
-      </div>
+  <div #anim [style.overflow]="overflow" class="dialog-container" [style.maxWidth.px]="maxWidth"
+    [style.maxWidth]="maxWidth" [style.height.px]="height" [style.height]="height" [style.width.px]="width"
+    [style.width]="width">
+    <div class="dialog-header">
+      <ng-content select="dialog-header"></ng-content>
+      <span (click)="close()" class="dialog-header-close"></span>
     </div>
-    <div class="dialog-back-drop"></div>
-  </body>
+    <div class="dialog-body">
+      <ng-content select="dialog-body"></ng-content>
+    </div>
+    <div class="dialog-footer">
+      <ng-content select="dialog-footer"></ng-content>
+    </div>
+  </div>
+  <div class="dialog-back-drop"></div>
 
-  </html>
 </div>

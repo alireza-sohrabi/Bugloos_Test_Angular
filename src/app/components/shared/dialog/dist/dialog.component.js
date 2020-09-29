@@ -13,6 +13,7 @@ var DialogComponent = /** @class */ (function () {
         this.height = 'auto';
         this.width = 450;
         this.maxWidth = '100%';
+        this.overflow = 'unset';
         this._show = false;
         this.showChange = new core_1.EventEmitter();
     }
@@ -79,6 +80,9 @@ var DialogComponent = /** @class */ (function () {
     __decorate([
         core_1.Input()
     ], DialogComponent.prototype, "maxWidth");
+    __decorate([
+        core_1.Input()
+    ], DialogComponent.prototype, "overflow");
     __decorate([
         core_1.Input()
     ], DialogComponent.prototype, "show");
